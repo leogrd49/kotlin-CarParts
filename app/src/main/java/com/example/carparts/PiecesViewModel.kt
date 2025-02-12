@@ -20,7 +20,9 @@ class PiecesViewModel : ViewModel() {
                 "arbre___cames",
                 "https://fr.wikipedia.org/wiki/Arbre_à_cames",
                 62,
-                424
+                424,
+                48.8566,
+                2.3522
             ),
             Pieces(
                 "Injecteur",
@@ -28,7 +30,9 @@ class PiecesViewModel : ViewModel() {
                 "injecteur",
                 "https://fr.wikipedia.org/wiki/Injecteur#:~:text=Injecteur%20de%20moteur,-Animation%20d%27un&text=L%27injecteur%20permet%20l%27apport,essence%20qui%20retient%20les%20impuretés.",
                 14,
-                70
+                70,
+                51.5074,
+                -0.1278
             ),
             Pieces(
                 "Bougie d'allumage",
@@ -36,7 +40,9 @@ class PiecesViewModel : ViewModel() {
                 "bougie",
                 "https://fr.wikipedia.org/wiki/Bougie_d%27allumage",
                 13,
-                40
+                40,
+                40.7128,
+                -74.0060
             ),
             Pieces(
                 "Piston",
@@ -44,15 +50,19 @@ class PiecesViewModel : ViewModel() {
                 "piston",
                 "https://fr.wikipedia.org/wiki/Piston_(mécanique)#:~:text=Le%20piston%20est%20l%27élément,un%20mouvement%20rotatif%20du%20vilebrequin.",
                 75,
-                55
+                55,
+                42.3601,
+                -83.0841
             ),
             Pieces(
-                "vilebrequin",
+                "Vilebrequin",
                 "Pièce tournante qui convertit le mouvement linéaire des pistons en mouvement rotatif pour entraîner les roues.",
                 "vilebrequin",
                 "https://fr.wikipedia.org/wiki/Vilebrequin_(moteur)#:~:text=Le%20vilebrequin%20est%20un%20dispositif,de%20rotation%20continu%2C%20et%20inversement.",
                 60,
-                500
+                500,
+                48.8566,
+                2.3522
             )
         )
         _favorisList.value =

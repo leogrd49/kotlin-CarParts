@@ -12,6 +12,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import com.example.carparts.databinding.FragmentDetailsBinding
+import org.osmdroid.util.GeoPoint
+import org.osmdroid.views.overlay.Marker
+import org.osmdroid.views.overlay.ScaleBarOverlay
 
 class DetailsFragment : Fragment() {
 
@@ -44,10 +47,21 @@ class DetailsFragment : Fragment() {
             binding.largeurTv.text = "${it.largeur} mm"
             binding.longueurTv.text = "${it.longueur} mm"
 
-            val imageResId = resources.getIdentifier(it.image, "drawable", context?.packageName)
-            if (imageResId != 0) {
-                binding.detailsImageIv.setImageResource(imageResId)
-            }
+            val startPoint = GeoPoint(it.latitude, it.longitude)
+            binding.imageMapPlage.setUseDataConnection(true)
+            binding.imageMapPlage.zoomController.setZoomInEnabled(true)
+            binding.imageMapPlage.zoomController.setZoomOutEnabled(true)
+            binding.imageMapPlage.setMultiTouchControls(true)
+            binding.imageMapPlage.controller.setCenter(startPoint)
+            binding.imageMapPlage.controller.setZoom(13.5)
+
+            val myScaleBarOverlay = ScaleBarOverlay(binding.imageMapPlage)
+            binding.imageMapPlage.overlays.add(myScaleBarOverlay)
+
+            val startMarker = Marker(binding.imageMapPlage)
+            startMarker.position = startPoint
+            startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+            binding.imageMapPlage.overlays.add(startMarker)
         }
 
         binding.detailsPlusInformationsTv.setOnClickListener {
@@ -55,14 +69,6 @@ class DetailsFragment : Fragment() {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
             startActivity(intent)
         }
-    }
-
-    private fun allerVersListe() {
-        Toast.makeText(requireContext(), "Navigation vers la liste", Toast.LENGTH_SHORT).show()
-    }
-
-    private fun allerVersCarte() {
-        Toast.makeText(requireContext(), "Navigation vers la carte", Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {

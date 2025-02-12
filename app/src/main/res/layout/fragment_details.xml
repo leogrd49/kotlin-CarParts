@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailsActivity">
+    tools:context=".DetailsFragment">
 
     <TextView
         android:id="@+id/detail_titre_tv"
@@ -66,15 +66,16 @@
             android:gravity="center" />
     </GridLayout>
 
-    <ImageView
-        android:id="@+id/details_image_iv"
-        android:layout_width="310dp"
+    <org.osmdroid.views.MapView
+        android:id="@+id/imageMapPlage"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="16dp"
+        app:layout_constraintHeight_percent="0.3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/details_table_gl"
-        android:src="@drawable/arbre___cames" />
+        app:layout_constraintTop_toBottomOf="@id/details_table_gl"/>
 
     <TextView
         android:id="@+id/details_description_tv"
@@ -87,7 +88,7 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/details_image_iv" />
+        app:layout_constraintTop_toBottomOf="@id/imageMapPlage" />
 
     <TextView
         android:id="@+id/details_plus_informations_tv"
