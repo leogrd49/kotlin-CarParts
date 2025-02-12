@@ -48,6 +48,7 @@
             android:gravity="center" />
 
         <TextView
+            android:id="@+id/largeur_tv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
@@ -56,6 +57,7 @@
             android:gravity="center" />
 
         <TextView
+            android:id="@+id/longueur_tv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"

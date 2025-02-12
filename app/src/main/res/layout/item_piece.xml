@@ -8,40 +8,46 @@
     app:cardCornerRadius="8dp"
     android:alpha="0.9">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/imagePiece"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:scaleType="centerInside"
-            android:src="@drawable/arbre___cames" />
+            android:src="@drawable/arbre___cames"
+            android:layout_margin="8dp"/>
 
-        <TextView
-            android:id="@+id/nomPiece"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="false"
-            android:layout_margin="16dp"
-            android:text="@string/piece_nom"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="8dp">
 
-        <TextView
-            android:id="@+id/descriptionPiece"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/nomPiece"
-            android:layout_marginStart="16dp"
-            android:maxLines="3"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/piece_description"
-            android:textColor="@android:color/white"
-            android:textSize="14sp"/>
+            <TextView
+                android:id="@+id/nomPiece"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/piece_nom"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/descriptionPiece"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="3"
+                android:text="@string/piece_description"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:layout_marginTop="4dp"/>
+
+        </LinearLayout>
 
         <CheckBox
             android:id="@+id/likeButton"
@@ -49,9 +55,8 @@
             android:layout_height="48dp"
             android:button="@drawable/favori_ou_non"
             android:buttonTint="@null"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_margin="16dp"/>
+            android:layout_gravity="top|end"
+            android:layout_margin="8dp"/>
 
-    </RelativeLayout>
+    </LinearLayout>
 </androidx.cardview.widget.CardView>

@@ -1,6 +1,5 @@
 package com.example.carparts
 
-import PiecesRecyclerAdapter
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,32 +7,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.carparts.databinding.FragmentListeBinding
-import kotlinx.coroutines.launch
 
 class ListeFragment : Fragment() {
 
+    private val viewModel: PiecesViewModel by activityViewModels()
     private var _binding: FragmentListeBinding? = null
     private val binding get() = _binding!!
-
-    private val viewModel: PiecesViewModel by viewModels()
-    private lateinit var piecesAdapter: PiecesRecyclerAdapter
-
-    private val pieces by lazy {
-        val arbre = Pieces(
-            "Arbre à Cames",
-            "L'arbre à cames est une pièce mécanique utilisée, principalement, dans des moteurs à pistons à quatre temps pour la commande synchronisée des soupapes. Il se compose d'une tige cylindrique disposant d'autant de cames que de soupapes à commander indépendamment ou par groupe, glissant sur la queue de soupape, ou sur un renvoi mécanique.",
-            "arbre___cames"
-        )
-        List(16) { arbre }
-    }
+    private val favorisList = mutableListOf<Boolean>()
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentListeBinding.inflate(inflater, container, false)
@@ -42,40 +28,41 @@ class ListeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupWindowInsets()
-        setupRecyclerView()
-        observeFavoris()
-    }
 
-    private fun setupWindowInsets() {
         ViewCompat.setOnApplyWindowInsetsListener(binding.listePieces) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-    }
 
-    private fun setupRecyclerView() {
-        piecesAdapter = PiecesRecyclerAdapter(
-            requireActivity(),
-            pieces,
-            ArrayList(viewModel.favoris.value)
-        ) { position ->
-            viewModel.toggleFavorite(position)
-        }
-
-        binding.listePieces.apply {
-            layoutManager = LinearLayoutManager(requireContext())
-            adapter = piecesAdapter
-        }
-    }
-
-    private fun observeFavoris() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.favoris.collect { favoris ->
-                piecesAdapter.updateFavoris(ArrayList(favoris))
+        viewModel.pieces.observe(viewLifecycleOwner) { lesPieces ->
+            if (savedInstanceState != null) {
+                val savedFavoris = savedInstanceState.getBooleanArray("favorisList")
+                if (savedFavoris != null) {
+                    favorisList.clear()
+                    favorisList.addAll(savedFavoris.toList())
+                } else {
+                    favorisList.addAll(List(lesPieces.size) { false })
+                }
+            } else {
+                favorisList.addAll(List(lesPieces.size) { false })
             }
+
+            val adapter = PiecesRecyclerAdapter(requireActivity(), lesPieces, favorisList, ::toggleFavorite)
+
+            binding.listePieces.layoutManager = LinearLayoutManager(requireContext())
+            binding.listePieces.adapter = adapter
         }
+    }
+
+    fun toggleFavorite(position: Int) {
+        favorisList[position] = !favorisList[position]
+        binding.listePieces.adapter?.notifyItemChanged(position)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putBooleanArray("favorisList", favorisList.toBooleanArray())
     }
 
     override fun onDestroyView() {
