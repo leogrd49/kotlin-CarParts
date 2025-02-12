@@ -24,4 +24,10 @@
             app:argType="integer"
             android:defaultValue="-1" />
     </fragment>
+    <fragment
+        android:id="@+id/carteFragment"
+        android:name="com.example.carparts.CarteFragment"
+        android:label="fragment_carte"
+        tools:layout="@layout/fragment_carte" >
+    </fragment>
 </navigation>

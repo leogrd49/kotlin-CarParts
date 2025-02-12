@@ -1,10 +1,7 @@
 package com.example.carparts
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.findNavController
 import com.example.carparts.databinding.ActivityPiecesBinding
 import org.osmdroid.config.Configuration
@@ -23,8 +20,9 @@ class PiecesActivity : AppCompatActivity() {
         }
 
         binding.allerVersCartePieces.setOnClickListener{
-
+            findNavController(R.id.nav_host_fragment).navigate(R.id.carteFragment)
         }
+
 
         val osmConf = Configuration.getInstance()
         val basePath = File(getCacheDir().getAbsolutePath(), "osmdroid")
