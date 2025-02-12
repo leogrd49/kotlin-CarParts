@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_listeFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
+        <action
+            android:id="@+id/action_listeFragment_to_carteFragment"
+            app:destination="@id/carteFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
