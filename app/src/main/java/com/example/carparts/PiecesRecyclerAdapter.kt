@@ -5,7 +5,10 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.Navigation
+import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.carparts.ListeFragmentDirections
 import com.example.carparts.Pieces
 import com.example.carparts.R
 
@@ -42,8 +45,19 @@ class PiecesRecyclerAdapter(
         val currentPiece = piecesList[position]
         holder.nomPiece.text = currentPiece.nom
         holder.descriptionPiece.text = currentPiece.description
-        holder.heartButton.isSelected = favorisList[position]
+        holder.heartButton.isChecked = favorisList[position]
+
+        holder.itemView.setOnClickListener {
+            val action = ListeFragmentDirections.actionListeFragmentToDetailsFragment(position)
+            findNavController(holder.itemView).navigate(action)
+        }
     }
+
+    fun updateFavoris(newFavoris: ArrayList<Boolean>) {
+        favorisList.clear()
+        favorisList.addAll(newFavoris)
+    }
+
 
     override fun getItemCount() = piecesList.size
 }

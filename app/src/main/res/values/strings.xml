@@ -2,5 +2,7 @@
     <string name="app_name">CarParts</string>
     <string name="piece_nom">Nom de la pièce</string>
     <string name="piece_description">Description de la pièce</string>
-    <string name="bouton_like">Like Button</string>
+    <string name="bouton_like">Bouton Favoris</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

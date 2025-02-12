@@ -16,7 +16,7 @@
             android:id="@+id/imagePiece"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:scaleType="centerCrop"
+            android:scaleType="centerInside"
             android:src="@drawable/arbre___cames" />
 
         <TextView
@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="false"
             android:layout_margin="16dp"
-            android:text="Nom de la pièce"
+            android:text="@string/piece_nom"
             android:textColor="@android:color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -39,7 +39,7 @@
             android:maxLines="3"
             android:layout_marginBottom="16dp"
             android:layout_marginTop="16dp"
-            android:text="Description de la pièce"
+            android:text="@string/piece_description"
             android:textColor="@android:color/white"
             android:textSize="14sp"/>
 
