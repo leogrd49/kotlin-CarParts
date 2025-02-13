@@ -1,3 +1,5 @@
+package com.example.carparts
+
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -5,9 +7,8 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.carparts.Pieces
-import com.example.carparts.R
 
 class PiecesRecyclerAdapter(
     private val context: Context,
@@ -20,9 +21,10 @@ class PiecesRecyclerAdapter(
         val heartButton: CheckBox = itemView.findViewById(R.id.likeButton)
         val nomPiece: TextView = itemView.findViewById(R.id.nomPiece)
         val descriptionPiece: TextView = itemView.findViewById(R.id.descriptionPiece)
+        val imagePiece: ImageView = itemView.findViewById(R.id.imagePiece)
 
         init {
-           heartButton.setOnClickListener {
+            heartButton.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     toggleFavoriteListener(position)
@@ -42,10 +44,28 @@ class PiecesRecyclerAdapter(
         val currentPiece = piecesList[position]
         holder.nomPiece.text = currentPiece.nom
         holder.descriptionPiece.text = currentPiece.description
-        holder.heartButton.isSelected = favorisList[position]
+        holder.heartButton.isChecked = favorisList[position]
+
+        val imageResId = context.resources.getIdentifier(
+            currentPiece.image,
+            "drawable",
+            context.packageName
+        )
+        if (imageResId != 0) {
+            holder.imagePiece.setImageResource(imageResId)
+        }
+
+        holder.itemView.setOnClickListener {
+            val action = ListeFragmentDirections.actionListeFragmentToDetailsFragment(position)
+            findNavController(holder.itemView).navigate(action)
+        }
+    }
+
+    fun updateFavoris(newFavoris: ArrayList<Boolean>) {
+        favorisList.clear()
+        favorisList.addAll(newFavoris)
+        notifyDataSetChanged()
     }
 
     override fun getItemCount() = piecesList.size
 }
-
-

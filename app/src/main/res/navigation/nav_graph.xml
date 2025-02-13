@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/listeFragment">
+
+    <fragment
+        android:id="@+id/listeFragment"
+        android:name="com.example.carparts.ListeFragment"
+        android:label="fragment_liste"
+        tools:layout="@layout/fragment_liste" >
+        <action
+            android:id="@+id/action_listeFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+        <action
+            android:id="@+id/action_listeFragment_to_carteFragment"
+            app:destination="@id/carteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.example.carparts.DetailsFragment"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_details" >
+        <argument
+            android:name="pieceId"
+            app:argType="integer"
+            android:defaultValue="-1" />
+    </fragment>
+    <fragment
+        android:id="@+id/carteFragment"
+        android:name="com.example.carparts.CarteFragment"
+        android:label="fragment_carte"
+        tools:layout="@layout/fragment_carte" >
+    </fragment>
+</navigation>

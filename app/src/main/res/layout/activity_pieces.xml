@@ -7,4 +7,40 @@
     android:layout_height="match_parent"
     tools:context=".Pieces">
 
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_graph"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/linearLayout"/>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="16dp">
+
+        <Button
+            android:id="@+id/allerVersListePieces"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Liste"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/allerVersCartePieces"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Carte"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
